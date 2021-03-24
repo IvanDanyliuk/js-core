@@ -6,11 +6,10 @@ console.log(surname);
 //Task 3
 let currentCity = "Kyiv";
 let nativeCity = "Lviv";
-document.write("<h3>Task 3</h3>" + "Values before making a copy: " + currentCity + " " + nativeCity + "</br>");
+alert("Values before making a copy: " + currentCity + " " + nativeCity);
 
 currentCity = nativeCity;
-document.write("Values after making a copy: " + currentCity + " " + nativeCity + "</br>");
-
+alert("Values after making a copy: " + currentCity + " " + nativeCity);
 
 //Task 4
 let myObject = {
@@ -56,7 +55,7 @@ console.log(
 let login = prompt("Enter your login", "Login");
 let email = prompt("Enter your email", "Email");
 let password = prompt("Enter your password", "Password");
-document.write("<h3>Task 7</h3>" + "Dear " + login + ", your email is " + email + ", your password is " + password);
+alert("Dear " + login + ", your email is " + email + ", your password is " + password);
 
 
 //Task 8
