@@ -11,6 +11,7 @@ alert("Values before making a copy: " + currentCity + " " + nativeCity);
 currentCity = nativeCity;
 alert("Values after making a copy: " + currentCity + " " + nativeCity);
 
+
 //Task 4
 let myObject = {
     string: "This is a string",
