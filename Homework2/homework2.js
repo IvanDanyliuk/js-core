@@ -82,6 +82,7 @@ if(!isNaN(square) && square !== 0) {
 //Task 7
 let currentTime = new Date();
 let time = currentTime.getHours();
+console.log(time);
 
 //Method 1
 switch(true) {
@@ -110,5 +111,5 @@ time >= 23 && time <= 24 || time >= 0 && time < 5 ?
             console.log("Доброго дня") : 
             time >= 17 && time < 23 ? 
                 console.log("Доброго вечора") : 
-                console.log("Введіть коректний час!");
+                console.log("Щось пішло не так!");
 
