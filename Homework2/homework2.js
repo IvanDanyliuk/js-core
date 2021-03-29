@@ -98,7 +98,7 @@ switch(true) {
         console.log("Доброго вечора");
         break;
     default:
-        console.log("Введіть коректний час!");
+        console.log("Щось пішло не так!");
 }
 
 //Method 2
