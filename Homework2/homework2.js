@@ -80,7 +80,8 @@ if(!isNaN(square) && square !== 0) {
 
 
 //Task 7
-let time = +prompt("Введіть час", "");
+let currentTime = new Date();
+let time = currentTime.getHours();
 
 //Method 1
 switch(true) {
