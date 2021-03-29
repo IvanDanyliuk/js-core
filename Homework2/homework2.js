@@ -10,11 +10,11 @@ let res2 = Boolean(x) + String(2);
 console.log(res2);                  // "true2"
 console.log(typeof res2);           // "string"
 
-let res3 = !!(x + y);
+let res3 = Boolean(x + y);
 console.log(res3);                  // true
 console.log(typeof res3);           // "boolean"
 
-let res4 = parseInt(x / !y);
+let res4 = parseInt(x / isNaN(y));
 console.log(res4);                  // NaN
 console.log(typeof res4);           // "number"
 
@@ -101,13 +101,13 @@ switch(true) {
 }
 
 //Method 2
-time >= 23 && time <= 24 || time >= 0 && time < 5
-    ? console.log("Доброї ночі")
-    : time >= 5 && time < 11
-        ? console.log("Доброго ранку")
-        : time >= 11 && time < 17
-            ? console.log("Доброго дня")
-            : time >= 17 && time < 23
-                ? console.log("Доброго вечора")
-                : console.log("Введіть коректний час!");
+time >= 23 && time <= 24 || time >= 0 && time < 5 ? 
+    console.log("Доброї ночі") : 
+    time >= 5 && time < 11 ? 
+        console.log("Доброго ранку") : 
+        time >= 11 && time < 17 ? 
+            console.log("Доброго дня") : 
+            time >= 17 && time < 23 ? 
+                console.log("Доброго вечора") : 
+                console.log("Введіть коректний час!");
 
