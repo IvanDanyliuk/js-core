@@ -82,7 +82,6 @@ if(!isNaN(square) && square !== 0) {
 //Task 7
 let currentTime = new Date();
 let time = currentTime.getHours();
-console.log(time);
 
 //Method 1
 switch(true) {
