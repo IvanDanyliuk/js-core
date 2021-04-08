@@ -40,7 +40,7 @@ class Person {
         this.surname = surname
     }
     showFullName() {
-        return this.name + " " + this.surname;
+        return this.surname + " " + this.name;
     }
 }
 
@@ -50,14 +50,14 @@ class Student extends Person {
         this.year = year
     }
     showFullName(middleName) {
-        return this.surname + " " + this.name + " " + middleName;
+        return super.showFullName() + " " + middleName;
     }
     showCourse() {
         let course = new Date().getFullYear() - this.year;
         if(course >= 1 && course <= 6) {
             return "Current course " + course;
         } else {
-            return "Hm... It looks like you have already graduated from university";
+            return "Hm... It looks like you are not a student";
         }
     }
 }
@@ -66,8 +66,8 @@ let student1 = new Student("Petro", "Petrenko", 2015);
 console.log(student1.showFullName("Petrovych"))
 console.log(student1.showCourse());
 
-let student2 = new Student("Ivan", "Danyliuk", 2008);
-console.log(student2.showFullName("Andriyovych"))
+let student2 = new Student("Andriy", "Shevchenko", 2008);
+console.log(student2.showFullName("Mykolayovych"))
 console.log(student2.showCourse());
 
 
@@ -81,7 +81,11 @@ class Worker {
         this.#experience = 1.2
     }
     showSalary() {
-        return this.dayRate * this.workingDays;
+        if(this.dayRate >= 0 && this.workingDays >= 0) {
+            return this.dayRate * this.workingDays;
+        } else {
+            throw new Error("The day rate and working days should not be negative");
+        }
     }
     showSalaryWithExperience() {
         return this.showSalary() * this.#experience;
@@ -115,6 +119,7 @@ function showWorkersInfo() {
         worker.experience = 1.5;
         console.log("New experince " + worker.experience);
         console.log(worker.fullName + " salary: " + worker.showSalaryWithExperience());
+        console.log("\n")
     });
 }
 showWorkersInfo(worker1, worker2, worker3);
