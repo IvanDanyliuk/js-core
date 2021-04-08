@@ -155,7 +155,7 @@ class Triangle extends GeometricFigure {
     constructor(side, height) {
         super();
         this.side = side;
-        this.height = heigh;
+        this.height = height;
     }
     getArea() {
         if(this.side > 0 && this.height > 0) {
