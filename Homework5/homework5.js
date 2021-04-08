@@ -36,8 +36,8 @@ showProps(car);
 //Task 3
 class Person {
     constructor(name, surname) {
-        this.name = name,
-        this.surname = surname
+        this.name = name;
+        this.surname = surname;
     }
     showFullName() {
         return this.surname + " " + this.name;
