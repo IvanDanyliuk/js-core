@@ -47,7 +47,7 @@ class Person {
 class Student extends Person {
     constructor(name, surname, year) {
         super(name, surname);
-        this.year = year
+        this.year = year;
     }
     showFullName(middleName) {
         return super.showFullName() + " " + middleName;
@@ -75,10 +75,10 @@ console.log(student2.showCourse());
 class Worker {
     #experience;
     constructor(fullName, dayRate, workingDays) {
-        this.fullName = fullName,
-        this.dayRate = dayRate,
-        this.workingDays = workingDays,
-        this.#experience = 1.2
+        this.fullName = fullName;
+        this.dayRate = dayRate;
+        this.workingDays = workingDays;
+        this.#experience = 1.2;
     }
     showSalary() {
         if(this.dayRate >= 0 && this.workingDays >= 0) {
@@ -154,8 +154,8 @@ class GeometricFigure {
 class Triangle extends GeometricFigure {
     constructor(side, height) {
         super();
-        this.side = side,
-        this.height = height
+        this.side = side;
+        this.height = heigh;
     }
     getArea() {
         if(this.side > 0 && this.height > 0) {
@@ -169,7 +169,7 @@ class Triangle extends GeometricFigure {
 class Square extends GeometricFigure {
     constructor(side) {
         super();
-        this.side = side
+        this.side = side;
     }
     getArea() {
         if(this.side > 0) {
@@ -183,7 +183,7 @@ class Square extends GeometricFigure {
 class Circle extends GeometricFigure {
     constructor(radius) {
         super();
-        this.radius = radius
+        this.radius = radius;
     }
     getArea() {
         if(this.radius > 0) {
