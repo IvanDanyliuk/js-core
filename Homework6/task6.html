@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 6: Task 6</title>
+</head>
+
+<body>
+    <input type="text" id="input1" value="Text1">
+    <input type="text" id="input2" value="Text2">
+
+    <script>
+        let firstMessage = prompt("Enter something...", "");
+        let secondMessage = prompt("Enter something...", "");
+
+        let firstInput = document.querySelector("#input1");
+        let secondInput = document.querySelector("#input2");
+
+        firstInput.value = firstMessage;
+        secondInput.value = secondMessage;
+
+        firstInput.value = secondMessage;
+        secondInput.value = firstMessage;
+    </script>
+</body>
+</html>
