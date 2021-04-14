@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: rgb(52, 190, 224);
+}
+
+.main-section {
+
+}
+
+.main-section__heading {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px 0;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+.main-section__output-data {}
+
+.main-section__panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.main-section__form {}
+
+.form-input-text {}
+
+.add-btn {}
+
+.main-section__dashboard {}
+
+.main-section__report {}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}

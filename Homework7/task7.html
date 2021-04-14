@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 7: Task 7</title>
+</head>
+<body>
+    <select name="country" id="country">
+        <option value="ger">Germany</option>
+        <option value="usa">USA</option>
+        <option value="ukr">Ukraine</option>
+    </select>
+                        
+    <select name="cities" id="cities"></select>
+    <p></p>
+
+    <script>
+        const countryList = document.querySelector("#country");
+        const citiesList = document.querySelector("#cities");
+        const result = document.querySelector("p");
+
+        const cities = {
+            ger: ["Berlin", "Munchen", "Dortmund", "Hamburg"],
+            usa: ["New-York", "Boston", "Washington", "Chicago"],
+            ukr: ["Kyiv", "Lviv", "Kharkiv", "Dnipro"]
+        };
+
+        function createCitiesList(country) {
+            for(let i = 0; i < cities[country].length; i++) {
+                let item = document.createElement("option");
+                item.innerHTML = cities[country][i];
+                citiesList.appendChild(item);
+            }
+        };
+        function showResult() {
+            result.innerHTML = countryList[countryList.selectedIndex].innerHTML + ", " + citiesList[citiesList.selectedIndex].innerHTML
+        }
+
+        window.addEventListener("load", function() {
+            createCitiesList(countryList.value);
+            showResult();
+        });
+        countryList.addEventListener("change", function(event) {
+            while(citiesList.firstChild) {
+                citiesList.removeChild(citiesList.firstChild)
+            }
+            createCitiesList(event.target.value);
+            showResult();
+        });
+        citiesList.addEventListener("change", function() {
+            showResult();
+        });
+
+    </script>
+</body>
+</html>

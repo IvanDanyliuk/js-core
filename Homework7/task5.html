@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 7: Task 6</title>
+    <style>
+        ul {
+            padding: 0;
+        }
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <button>Live button!</button>
+    <ul></ul>
+
+    <script>
+        const btn = document.querySelector("button");
+        const messageList = document.querySelector("ul");
+
+        function addMessage(message) {
+            let eventMessage = document.createElement("li");
+            eventMessage.innerHTML = message;
+            messageList.appendChild(eventMessage);
+        }
+
+        btn.addEventListener("click", function() {
+            return addMessage("I was pressed!");
+        });
+        btn.addEventListener("mouseenter", function() {
+            return addMessage("Mouse on me!");
+        });
+        btn.addEventListener("mouseleave", function() {
+            return addMessage("Mouse is not on me!");
+        });
+    </script>
+</body>
+</html>

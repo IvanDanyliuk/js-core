@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget App</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <main>
+        <section class="main-section">
+            <div class="main-section__heading">
+                <div class="main-section__output-data">
+                    <h2>Incomes</h2>
+                    <div id="total-income"></div>
+                </div>
+            </div>
+            <div class="main-section__panel">
+                <form action="" class="main-section__form">
+                    <fieldset>
+                        <input type="text" class="form-input-text" id="income-name">
+                        <input type="text" id="income-sum">
+                        <button class="add-btn">Add</button>
+                    </fieldset>
+                </form>
+                <div class="main-section__panel_items">
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-section">
+            <div class="main-section__heading">
+                <div class="main-section__output-data">
+                    <h2>Expenses</h2>
+                    <div id="total-expenses"></div>
+                </div>
+            </div>
+            <div class="main-section__panel">
+                <form action="" class="main-section__form">
+                    <fieldset>
+                        <input type="text" class="form-input-text" id="expense-name">
+                        <input type="text" id="expense-sum">
+                        <button class="add-btn">Add</button>
+                    </fieldset>
+                </form>
+                <div class="main-section__panel_items">
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="main-section">
+            <div class="main-section__dashboard">
+                <div class="main-section__budget">Your budget <span id="final-budget-value">1100</span></div>
+                <button id="count">Count</button>
+            </div>
+            <div class="main-section__report">
+                <h3>Your expenses report</h3>
+                <div class="main-section__report_body" id="report-body">
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="main-section">
+            <div class="main-section__heading">
+                <h2>Currency Exchange</h2>
+            </div>
+            <div class="main-section__panel">
+                <form action="">
+                    <input type="text">
+                    <select name="" id="">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="uah">UAH</option>
+                    </select>
+                    <select name="" id="">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
+                        <option value="uah">UAH</option>
+                    </select>
+                    <button>Convert</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/ui-effects.js"></script>
+</body>
+</html>

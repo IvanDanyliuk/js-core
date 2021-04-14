@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 5: Task 5</title>
+</head>
+
+<body>
+    <select name="names" id="names">
+        <option value="Peter">Peter</option>
+        <option value="John">John</option>
+        <option value="Alice">Alice</option>
+        <option value="Alex">Alex</option>
+        <option value="Iren">Iren</option>
+    </select>
+    <button>Choose and Delete</button>
+
+    <script>
+        const nameList = document.querySelector("select");
+        const btn = document.querySelector("button");
+
+        btn.addEventListener("click", function() {
+            nameList.remove(nameList.selectedIndex);
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #34bee0;
+}
+
+.main-section__heading {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px 0;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.main-section__panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s ease-out;
+  transition: max-height 0.3s ease-out;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+/*# sourceMappingURL=main.css.map */
