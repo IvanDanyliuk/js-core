@@ -5,9 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Budget App</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
+    <header>
+        <div class="greeting">
+            <div class="greeting__image">
+                <i id="greeting__image" class="fas"></i>
+            </div>
+            <div class="greeting__message">
+                <div class="greeting__message_title" id="header-greeting">Good morning!</div>
+                <div class="greeting__message_date" id="header-date"></div>
+            </div>
+        </div>
+    </header>
     <main>
         <section class="main-section">
             <div class="main-section__heading">
@@ -15,23 +29,26 @@
                     <h2>Incomes</h2>
                     <div id="total-income"></div>
                 </div>
+                <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
                 <form action="" class="main-section__form">
                     <fieldset>
                         <input type="text" class="form-input-text" id="income-name">
-                        <input type="text" id="income-sum">
+                        <input type="text" class="form-input-sum" id="income-sum">
                         <button class="add-btn">Add</button>
                     </fieldset>
                 </form>
-                <div class="main-section__panel_items">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
+                <ul class="main-section__panel_items">
+                    <li class="item income-item">
+                        <div class="item-body">
+                            <div class="item-body__title">Salary</div>
+                            <div class="item-body__date">14.04.2021</div>
+                            <div class="item-body__value">1700</div>
+                        </div>
+                        <div class="close-btn">x</div>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -41,22 +58,27 @@
                     <h2>Expenses</h2>
                     <div id="total-expenses"></div>
                 </div>
+                <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
                 <form action="" class="main-section__form">
                     <fieldset>
                         <input type="text" class="form-input-text" id="expense-name">
-                        <input type="text" id="expense-sum">
+                        <input type="text" class="form-input-sum" id="expense-sum">
                         <button class="add-btn">Add</button>
                     </fieldset>
                 </form>
-                <div class="main-section__panel_items">
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                    <p>Lorem ipsum dolor sit amet consectetur.</p>
-                </div>
+                <ul class="main-section__panel_items">
+                    <li class="item income-item">
+                        <div class="item-body">
+                            <div class="item-body__title"></div>
+                            <div class="item-body__category"></div>
+                            <div class="item-body__date"></div>
+                            <div class="item-body__value"></div>
+                        </div>
+                        <div class="close-btn">x</div>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -68,6 +90,7 @@
             <div class="main-section__report">
                 <h3>Your expenses report</h3>
                 <div class="main-section__report_body" id="report-body">
+                    <div class="report-item"></div>
 
                 </div>
 
@@ -77,9 +100,10 @@
         <section class="main-section">
             <div class="main-section__heading">
                 <h2>Currency Exchange</h2>
+                <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
-                <form action="">
+                <form action="" class="main-section__form">
                     <input type="text">
                     <select name="" id="">
                         <option value="usd">USD</option>
@@ -98,5 +122,6 @@
     </main>
 
     <script src="./js/ui-effects.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
