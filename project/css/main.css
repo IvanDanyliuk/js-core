@@ -103,6 +103,7 @@ header {
 }
 
 .main-section__panel {
+  position: relative;
   margin: 10px 0;
   padding: 0 18px;
   width: calc(100% - 36px);
@@ -150,5 +151,58 @@ header {
   border-radius: 5px;
   background: #471879;
   color: white;
+}
+
+.main-section__panel_items {
+  position: relative;
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+.item {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #b7afc9;
+  border-radius: 5px;
+}
+
+.item-body {
+  position: relative;
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.item-body__title {
+  width: 70%;
+}
+
+.item-body__date {
+  width: 20%;
+  font-size: 12px;
+}
+
+.item-body__value {
+  width: 10%;
+  font-weight: 600;
+}
+
+.close-btn {
+  cursor: pointer;
 }
 /*# sourceMappingURL=main.css.map */
