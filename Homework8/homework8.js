@@ -20,6 +20,7 @@ function checkEmail(email) {
 }
 
 [
+    "Qmail2@gmail.com",
     "example@gmail.com", 
     "1111", 
     "example.gmail.com", 
@@ -36,7 +37,7 @@ function checkEmail(email) {
 
 //Task 3
 let re = /d(b+)(d)/i;
-let result = "cdbBdbsbz".match(re).filter(function(str) { return typeof str === "string" });
+let result = "cdbBdbsbz".match(re).filter(function(item) {return typeof item === "string"});
 console.log(result);
 
 
@@ -55,7 +56,7 @@ function checkCardNumber(value) {
 
 [
     "9999-9999-9999-9999", 
-    "9999-9999-99999999", 
+    "9999999999999999", 
     "9999-99a9-9999-9999", 
     "9999-9999-9999"
 ].forEach(function(item) {

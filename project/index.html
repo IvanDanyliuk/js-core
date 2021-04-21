@@ -36,31 +36,10 @@
                     <fieldset>
                         <input type="text" class="form-input-text" id="income-name">
                         <input type="text" class="form-input-sum" id="income-sum">
-                        <button class="add-btn">Add</button>
+                        <button class="add-btn" id="add-income">Add</button>
                     </fieldset>
                 </form>
-                <ul class="main-section__panel_items">
-                    <li class="item income-item">
-                        <div class="item-body">
-                            <div class="item-body__title">Salary</div>
-                            <div class="item-body__date">14.04.2021</div>
-                            <div class="item-body__value">1700</div>
-                        </div>
-                        <div class="close-btn remove-income">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </li>
-                    <li class="item income-item">
-                        <div class="item-body">
-                            <div class="item-body__title">Deposit</div>
-                            <div class="item-body__date">14.04.2021</div>
-                            <div class="item-body__value">150</div>
-                        </div>
-                        <div class="close-btn remove-income">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </li>
-                </ul>
+                <ul class="main-section__panel_items" id="incomes-container"></ul>
             </div>
         </section>
 
@@ -77,35 +56,96 @@
                     <fieldset>
                         <input type="text" class="form-input-text" id="expense-name">
                         <input type="text" class="form-input-sum" id="expense-sum">
-                        <button class="add-btn">Add</button>
+                        <select name="" id="expense-category">
+                            <option value="home">Home</option>
+                            <option value="transport">Transport</option>
+                            <option value="food">Food</option>
+                            <option value="sport">Sport</option>
+                            <option value="rest">Rest</option>
+                            <option value="health">Health</option>
+                            <option value="clothes">Clothes&Style</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <button class="add-btn" id="add-expense">Add</button>
                     </fieldset>
                 </form>
-                <ul class="main-section__panel_items">
-                    <li class="item income-item">
-                        <div class="item-body">
-                            <div class="item-body__title"></div>
-                            <div class="item-body__category"></div>
-                            <div class="item-body__date"></div>
-                            <div class="item-body__value"></div>
-                        </div>
-                        <div class="close-btn">x</div>
-                    </li>
-                </ul>
+                <ul class="main-section__panel_items" id="expenses-container"></ul>
             </div>
         </section>
 
         <section class="main-section">
             <div class="main-section__dashboard">
-                <div class="main-section__budget">Your budget <span id="final-budget-value">1100</span></div>
+                <div class="main-section__budget">Your budget: <span id="final-budget-value"></span></div>
                 <button id="count">Count</button>
             </div>
             <div class="main-section__report">
                 <h3>Your expenses report</h3>
-                <div class="main-section__report_body" id="report-body">
-                    <div class="report-item"></div>
-
-                </div>
-
+                <ul class="main-section__report_body" id="report-body">
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-home"></i>
+                            <span>Utility Bills</span>
+                        </div>
+                        <div class="report-item__percent">17%</div>
+                        <div class="report-item__value">150</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-bus"></i>
+                            <span>Transport</span>
+                        </div>
+                        <div class="report-item__percent">12%</div>
+                        <div class="report-item__value">120</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-hamburger"></i>
+                            <span>Food & Grosery</span>
+                        </div>
+                        <div class="report-item__percent">25%</div>
+                        <div class="report-item__value">300</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Sport</span>
+                        </div>
+                        <div class="report-item__percent">3%</div>
+                        <div class="report-item__value">50</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-plane-departure"></i>
+                            <span>Vacation</span>
+                        </div>
+                        <div class="report-item__percent">36%</div>
+                        <div class="report-item__value">750</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-tshirt"></i>
+                            <span>Clothes</span>
+                        </div>
+                        <div class="report-item__percent">36%</div>
+                        <div class="report-item__value">750</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-first-aid"></i>
+                            <span>Health</span>
+                        </div>
+                        <div class="report-item__percent">3%</div>
+                        <div class="report-item__value">25</div>
+                    </li>
+                    <li class="report-item">
+                        <div class="report-item__title">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Other expenses</span>
+                        </div>
+                        <div class="report-item__percent">7%</div>
+                        <div class="report-item__value">100</div>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -123,11 +163,11 @@
                         <option value="uah">UAH</option>
                     </select>
                     <select name="" id="">
-                        <option value="usd">USD</option>
-                        <option value="eur">EUR</option>
                         <option value="uah">UAH</option>
+                        <option value="eur">EUR</option>
+                        <option value="usd">USD</option>
                     </select>
-                    <button>Convert</button>
+                    <button class="add-btn">Convert</button>
                 </form>
             </div>
         </section>
