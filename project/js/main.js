@@ -7,18 +7,32 @@ const appData = {
     report: []
 }
 
-let incomeName = document.querySelector("#income-name");
-let incomeSum = document.querySelector("#income-sum");
 let addIncomeBtn = document.querySelector("#add-income");
-
-let expenseName = document.querySelector("#expense-name");
-let expenseSum = document.querySelector("#expense-sum");
-let expenseCategory = document.querySelector("#expense-category");
 let addExpenseBtn = document.querySelector("#add-expense");
 
-let incomesContainer = document.querySelector("#incomes-container");
-let expensesContainer = document.querySelector("#expenses-container");
-let budgetContainer = document.querySelector("#final-budget-value");
+//IndexedDB
+let db;
+let dbReq = indexedDB.open("budgetDB", 1);
+dbReq.onupgradeneeded = event => {
+    db = event.target.result;
+    let incomes = db.createObjectStore("incomes", {autoIncrement: true});
+    let expenses = db.createObjectStore("expenses", {autoIncrement: true});
+}
+dbReq.onsuccess = event => {
+    db = event.target.result;
+}
+dbReq.onerror = event => {
+    console.log("Error of opening database" + event.target.errorCode);
+}
+
+const addDBObjectItem = (db, dbObject, title, sum, category = "incomes") => {
+    let tx = db.transaction([dbObject], "readwrite");
+    let store = tx.objectStore(dbObject);
+    let item = {title, category, sum};
+    store.add(item);
+}
+//IndexedDB
+
 
 const countTotalIncome = () => {
     if(appData.incomes.length > 0) {
@@ -33,19 +47,60 @@ const countTotalExpenses = () => {
 }
 
 const countBalance = () => {
+    let budgetContainer = document.querySelector("#final-budget-value");
     appData.balance = appData.totalIncome - appData.totalExpenses;
     budgetContainer.innerHTML = appData.balance;
 }
 
-const getData = () => {
-    //Should get the app data from database and write it to the appData object
+const getIncomesData = () => {
+    let txIncomes = db.transaction(["incomes"], "readonly");
+    let storeIncomes = txIncomes.objectStore("incomes");
+
+    let reqIncomes = storeIncomes.openCursor();
+    let incomesData = [];
+    
+    reqIncomes.onsuccess = event => {
+        let cursor = event.target.result;
+
+        if(cursor != null) {
+            incomesData.push(cursor.value);
+            cursor.continue();
+        } else {
+            appData.incomes = [...incomesData];
+            renderIncomes(appData.incomes);
+            countTotalIncome();
+            countBalance();
+        } 
+    }
 }
 
+const getExpensesData = () => {
+    let txExpenses = db.transaction(["expenses"], "readonly");
+    let storeExpenses = txExpenses.objectStore("expenses");
 
+    let reqExpenses = storeExpenses.openCursor();
+    let expensesData = [];
 
-const renderIncomes = () => {
+    reqExpenses.onsuccess = event => {
+        let cursor = event.target.result;
+
+        if(cursor != null) {
+            expensesData.push(cursor.value)
+            cursor.continue();
+        } else {
+            appData.expenses = [...expensesData]
+            renderExpenses(appData.expenses);
+            countTotalExpenses();
+            countBalance();
+            fillReport();
+        }   
+    }
+}
+
+const renderIncomes = (data) => {
+    let incomesContainer = document.querySelector("#incomes-container");
     incomesContainer.innerHTML = "";
-    for(let i = 0; i < appData.incomes.length; i++) {
+    for(let i = 0; i < data.length; i++) {
         let element = document.createElement("li");
         element.className = "item income-item";
         element.innerHTML = (`
@@ -62,6 +117,7 @@ const renderIncomes = () => {
 }
 
 const renderExpenses = () => {
+    let expensesContainer = document.querySelector("#expenses-container");
     expensesContainer.innerHTML = "";
     for(let i = 0; i < appData.expenses.length; i++) {
         let element = document.createElement("li");
@@ -83,6 +139,8 @@ const renderExpenses = () => {
 }
 
 const fillReport = () => {
+    let reportContainer = document.querySelector("#report-body");
+    reportContainer.innerHTML = "";
     let categories = [];
     for(let i = 0; i < appData.expenses.length; i++) {
         categories = [...categories, appData.expenses[i].category]
@@ -90,37 +148,52 @@ const fillReport = () => {
     let categoryList = [...new Set(categories)];
 
     for(let i = 0; i < categoryList.length; i++) {
-        let data = appData.expenses.filter(item => item.category == categoryList[i]).reduce((a, b) => a + b);
-        appData.report = [...appData.report, {title: categoryList[i], sum: data}]
+        let data = appData.expenses.filter(item => item.category == categoryList[i]).reduce((a, b) => a + b.sum, 0);
+        appData.report = [...appData.report, {title: categoryList[i].toUpperCase(), percent: Math.round(data / appData.totalExpenses * 100), sum: data}]
         
     }
-    console.log(categoryList);
+
+    for(let i = 0; i < appData.report.length; i++) {
+        let element = document.createElement("li");
+        element.className = "report-item";
+        element.innerHTML = (`
+            <div class="report-item__title">
+                <i class="fas fa-home"></i>
+                <span>${appData.report[i].title}</span>
+            </div>
+            <div class="report-item__percent">${appData.report[i].percent}%</div>
+            <div class="report-item__value">${appData.report[i].sum}</div>
+        `);
+        reportContainer.appendChild(element);
+    }
 }
 
+window.addEventListener("load", () => {
+    getIncomesData();
+    getExpensesData();
+});
 
 addIncomeBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    let itemId = new Date().getTime();
-    //This should be send to database
-    appData.incomes = [...appData.incomes, {id: itemId,title: incomeName.value, sum: incomeSum.value}];
-    //
+
+    let incomeName = document.querySelector("#income-name");
+    let incomeSum = document.querySelector("#income-sum");
+    addDBObjectItem(db, e.target.dataset.dbbranch, incomeName.value, +incomeSum.value);
     incomeName.value = "";
     incomeSum.value = "";
-    countTotalIncome();
-    countBalance();
-    renderIncomes();
+    getIncomesData();
+    console.log()
 });
 
 addExpenseBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    //This should be send to database
-    appData.expenses = [...appData.expenses, {title: expenseName.value, category: expenseCategory.value, sum: expenseSum.value}];
-    //
+    let expenseName = document.querySelector("#expense-name");
+    let expenseSum = document.querySelector("#expense-sum");
+    let expenseCategory = document.querySelector("#expense-category");
+    addDBObjectItem(db, e.target.dataset.dbbranch, expenseName.value, +expenseSum.value, expenseCategory.value);
     expenseName.value = "";
     expenseSum.value = "";
-    countTotalExpenses();
-    countBalance();
-    renderExpenses();
+    getExpensesData();
     fillReport();
 });
 

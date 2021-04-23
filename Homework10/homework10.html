@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <!-- **************Task 1************** -->
+    <a href="https://www.softserveinc.com/uk-ua">Link</a>
+    
+    <script>
+        $("a[href^='https://']").attr('target', '_blank');
+    </script>
+
+    
+    <!-- **************Task 2************** -->
+    <!-- <h2 class="head">header1</h2>
+    <h2 class="head">header2 <span class="inner">inner elem1</span></h2>
+    <h2>header3</h2>
+    <h2 class="head">header4<span>inner elem2</span></h2>
+    <h2>header5</h2>
+
+    <script>
+        $("h2.head").css("background", "green").find(".inner").css("font-size", "35px");
+    </script> -->
+
+
+<!-- **************Task 3************** -->
+    <!-- <h3>header1</h3>
+    <div>text1</div>
+    <h3>header2</h3>
+    <div>text2</div>
+
+    <script>
+        $("div").each((i, el) => $("h3")[i].before(el));
+    </script> -->
+
+
+<!-- **************Task 4************** -->
+    <!-- <form>
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+    </form>
+    
+    <script>
+        $("input[type='checkbox']").on("change", () => {
+            if($("input[type='checkbox']:checked").length === 3) {
+                $("input[type='checkbox']").attr("disabled", true);
+            }
+        });
+    </script> -->
+</body>
+</html>
