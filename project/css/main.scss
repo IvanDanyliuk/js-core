@@ -92,12 +92,19 @@ header {
     position: relative;
     width: 100%;
     margin: 18px 0;
+    display: flex;
+    align-items: flex-end;
 
     fieldset {
+        position: relative;
+        margin-right: 10px;
         border: none;
     }
+    input {
+        width: 100%;
+    }
     input, select {
-        padding: 0 10px;
+        padding: 0 10px;    
         height: 36px;
         font-size: 16px;
         border: 1px solid rgb(90, 90, 90);
@@ -107,8 +114,19 @@ header {
 .form-input-text {
     width: 40%;
 }
+.error-text, .error-sum {
+    display: none;
+    margin-bottom: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    color: rgb(211, 24, 24)
+}
+.form-input-category {
+    margin-right: 10px;
+    width: 20%;
+}
 .form-input-sum {
-    width: 15%;
+    width: 20%;
 }
 .add-btn {
     cursor: pointer;

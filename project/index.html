@@ -26,18 +26,22 @@
         <section class="main-section">
             <div class="main-section__heading">
                 <div class="main-section__output-data">
-                    <h2>Incomes</h2>
+                    <h2>Incomes: <span id="total-income"></span></h2>
                     <div id="total-income"></div>
                 </div>
                 <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
-                <form action="" class="main-section__form">
-                    <fieldset>
-                        <input type="text" class="form-input-text" id="income-name">
-                        <input type="text" class="form-input-sum" id="income-sum">
-                        <button class="add-btn" id="add-income" data-dbbranch="incomes">Add</button>
+                <form class="main-section__form">
+                    <fieldset class="form-input-text">
+                        <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div>
+                        <input type="text" id="income-name">
                     </fieldset>
+                    <fieldset class="form-input-sum">
+                        <div class="error-sum"><i class="fas fa-exclamation-circle"></i> Must be a number</div>
+                        <input type="text" id="income-sum">
+                    </fieldset>
+                    <button class="add-btn" id="add-income" data-dbbranch="incomes">Add</button>
                 </form>
                 <ul class="main-section__panel_items" id="incomes-container"></ul>
             </div>
@@ -46,28 +50,32 @@
         <section class="main-section">
             <div class="main-section__heading">
                 <div class="main-section__output-data">
-                    <h2>Expenses</h2>
+                    <h2>Expenses: <span id="total-expenses"></span></h2>
                     <div id="total-expenses"></div>
                 </div>
                 <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
-                <form action="" class="main-section__form">
-                    <fieldset>
-                        <input type="text" class="form-input-text" id="expense-name">
-                        <input type="text" class="form-input-sum" id="expense-sum">
-                        <select name="" id="expense-category">
-                            <option value="home">Home</option>
-                            <option value="transport">Transport</option>
-                            <option value="food">Food</option>
-                            <option value="sport">Sport</option>
-                            <option value="rest">Rest</option>
-                            <option value="health">Health</option>
-                            <option value="clothes">Clothes&Style</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <button class="add-btn" id="add-expense" data-dbbranch="expenses">Add</button>
+                <form class="main-section__form">
+                    <fieldset class="form-input-text">
+                        <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div>
+                        <input type="text" id="expense-name">
                     </fieldset>
+                    <fieldset class="form-input-sum">
+                        <div class="error-sum"><i class="fas fa-exclamation-circle"></i> Must be a number</div>
+                        <input type="text" id="expense-sum">
+                    </fieldset>
+                    <select class="form-input-category" id="expense-category">
+                        <option value="home">Home</option>
+                        <option value="transport">Transport</option>
+                        <option value="food">Food</option>
+                        <option value="sport">Sport</option>
+                        <option value="rest">Rest</option>
+                        <option value="health">Health</option>
+                        <option value="clothes">Clothes&Style</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <button class="add-btn" id="add-expense" data-dbbranch="expenses">Add</button>
                 </form>
                 <ul class="main-section__panel_items" id="expenses-container"></ul>
             </div>
@@ -89,14 +97,14 @@
                 <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
-                <form action="" class="main-section__form">
+                <form class="main-section__form">
                     <input type="text">
-                    <select name="" id="">
+                    <select id="from-currency">
                         <option value="usd">USD</option>
                         <option value="eur">EUR</option>
                         <option value="uah">UAH</option>
                     </select>
-                    <select name="" id="">
+                    <select id="to-currency">
                         <option value="uah">UAH</option>
                         <option value="eur">EUR</option>
                         <option value="usd">USD</option>
