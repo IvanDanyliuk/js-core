@@ -35,11 +35,11 @@
                 <form class="main-section__form">
                     <fieldset class="form-input-text">
                         <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div>
-                        <input type="text" id="income-name">
+                        <input type="text" class="section-input" id="income-name" placeholder="Income title...">
                     </fieldset>
                     <fieldset class="form-input-sum">
                         <div class="error-sum"><i class="fas fa-exclamation-circle"></i> Must be a number</div>
-                        <input type="text" id="income-sum">
+                        <input type="text" class="section-input" id="income-sum" placeholder="Income amount...">
                     </fieldset>
                     <button class="add-btn" id="add-income" data-dbbranch="incomes">Add</button>
                 </form>
@@ -59,11 +59,11 @@
                 <form class="main-section__form">
                     <fieldset class="form-input-text">
                         <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div>
-                        <input type="text" id="expense-name">
+                        <input type="text" class="section-input" id="expense-name" placeholder="Expense title...">
                     </fieldset>
                     <fieldset class="form-input-sum">
                         <div class="error-sum"><i class="fas fa-exclamation-circle"></i> Must be a number</div>
-                        <input type="text" id="expense-sum">
+                        <input type="text" class="section-input" id="expense-sum" placeholder="Expense amount...">
                     </fieldset>
                     <select class="form-input-category" id="expense-category">
                         <option value="home">Home</option>
@@ -72,7 +72,7 @@
                         <option value="sport">Sport</option>
                         <option value="rest">Rest</option>
                         <option value="health">Health</option>
-                        <option value="clothes">Clothes&Style</option>
+                        <option value="clothes">Clothes</option>
                         <option value="other">Other</option>
                     </select>
                     <button class="add-btn" id="add-expense" data-dbbranch="expenses">Add</button>
@@ -83,7 +83,7 @@
 
         <section class="main-section">
             <div class="main-section__dashboard">
-                <div class="main-section__budget">Your budget: <span id="final-budget-value"></span></div>
+                <div class="main-section__budget">Your balance: <span id="final-budget-value"></span></div>
             </div>
             <div class="main-section__report">
                 <h3>Your expenses report</h3>
@@ -98,22 +98,38 @@
             </div>
             <div class="main-section__panel">
                 <form class="main-section__form">
-                    <input type="text">
-                    <select id="from-currency">
-                        <option value="usd">USD</option>
-                        <option value="eur">EUR</option>
-                        <option value="uah">UAH</option>
-                    </select>
-                    <select id="to-currency">
-                        <option value="uah">UAH</option>
-                        <option value="eur">EUR</option>
-                        <option value="usd">USD</option>
-                    </select>
-                    <button class="add-btn">Convert</button>
+                    <input type="text" class="form-input-currency" id="currency-sum">
+                    <fieldset class="form-select-currency">
+                        <select id="from-currency">
+                            <option value="usd">USD</option>
+                            <option value="eur">EUR</option>
+                            <option value="uah">UAH</option>
+                            <option value="pln">PLN</option>
+                        </select>
+                        <select id="to-currency">
+                            <option value="uah">UAH</option>
+                            <option value="eur">EUR</option>
+                            <option value="usd">USD</option>
+                            <option value="pln">PLN</option>
+                        </select>
+                    </fieldset>
+                    <button class="add-btn" id="convert">Convert</button>
                 </form>
+                <div id="currency-result">
+                    Enter your amount and click "Convert"!
+                </div>
             </div>
         </section>
     </main>
+    <footer>
+        <div class="footer__title">Ivan Danyliuk. JSCore. 2021</div>
+        <div>
+            <a href="https://github.com/IvanDanyliuk/js-core/tree/main/project" target="_blank">
+                See the code
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </footer>
 
     <script src="./js/ui-effects.js"></script>
     <script src="./js/main.js"></script>

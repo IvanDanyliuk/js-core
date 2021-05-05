@@ -10,17 +10,29 @@ body {
 li {
     list-style: none;
 }
+a {
+    text-decoration: none;
+}
 
 .active,
 .main-section__heading:hover {
     background: linear-gradient(90deg, rgba(97,55,176,1) 0%, rgba(151,93,199,1) 100%);
 }
 
+header, 
+.main-section, 
+.main-section__heading, 
+.main-section__form, 
+.item, 
+.item-body, 
+.main-section__dashboard, 
+.report-item {
+    position: relative;
+    display: flex;
+}
 header {
     padding: 0 18px;
-    position: relative;
     height: 10vh;
-    display: flex;
     align-items: center;
     background: rgb(52, 0, 106);
     color: rgb(255, 255, 255);
@@ -29,7 +41,6 @@ header {
 .greeting {
     display: flex;
 }
-
 .greeting__image {
     margin-right: 10px;
     i {
@@ -37,29 +48,22 @@ header {
         color: rgb(252,212,98);
     }
 }
-
 .greeting__message_title {
     font-size: 16px;
     font-weight: 800;
 }
-
 .greeting__message_date {
     font-size: 12px;
     color: rgb(219, 219, 219)
 }
-
 .main-section {
-    position: relative;
     width: 100%;
     height: auto;
-    display: flex;
     flex-direction: column;
     align-items: center;
     background: linear-gradient(90deg, rgba(73,32,151,1) 0%, rgba(134,60,196,1) 100%);
 }
 .main-section__heading {
-    position: relative;
-    display: flex;
     justify-content: space-between;
     background: linear-gradient(90deg, rgba(73,32,151,1) 0%, rgba(134,60,196,1) 100%);
     color: rgb(255, 255, 255);
@@ -70,12 +74,9 @@ header {
     border: none;
     outline: none;
     transition: 0.4s;
-
     i {
         font-size: 20px;
     }
-}
-.main-section__output-data {
 }
 .main-section__panel {
     position: relative;
@@ -89,18 +90,15 @@ header {
     transition: 0.3s ease-out;
 }
 .main-section__form {
-    position: relative;
     width: 100%;
     margin: 18px 0;
-    display: flex;
     align-items: flex-end;
-
     fieldset {
         position: relative;
         margin-right: 10px;
         border: none;
     }
-    input {
+    .section-input {
         width: 100%;
     }
     input, select {
@@ -121,12 +119,12 @@ header {
     font-weight: 700;
     color: rgb(211, 24, 24)
 }
-.form-input-category {
+.form-input-category, .form-select-currency {
     margin-right: 10px;
     width: 20%;
 }
 .form-input-sum {
-    width: 20%;
+    width: 25%;
 }
 .add-btn {
     cursor: pointer;
@@ -145,28 +143,25 @@ header {
     width: 100%;
 }
 .item {
-    position: relative;
     margin-bottom: 10px;
     padding: 10px;
     width: 100%;
-    display: flex;
     justify-content: space-between;
     align-items: center;
     background: rgb(183, 175, 201);
     border-radius: 5px;
 }
 .item-body {
-    position: relative;
     width: 90%;
-    display: flex;
     align-items: center;
 }
 .item-body__title {
     width: 70%;
 }
-.item-body__date {
-    width: 20%;
-    font-size: 12px;
+.item-body__category {
+    i {
+        margin-right: 10px;
+    }
 }
 .item-body__value {
     width: 10%;
@@ -175,20 +170,10 @@ header {
 .close-btn {
     cursor: pointer;
 }
-.income-item {
-}
-.expense-item {
-
-}
-.item-body__category {
-}
 .main-section__dashboard {
-    position: relative;
     padding: 18px;
     width: 100%;
-    display: flex;
     justify-content: space-between;
-
     button {
         width: 150px;
         font-size: 20px;
@@ -201,7 +186,6 @@ header {
     font-size: 26px;
     font-weight: 700;
     color: rgb(255, 255, 255);
-
     span {
         font-size: 32px;
     }
@@ -210,7 +194,6 @@ header {
     position: relative;
     padding: 18px;
     width: 100%;
-
     h3 {
         margin-bottom: 18px;
         font-size: 18px;
@@ -225,25 +208,61 @@ header {
     background: rgb(204, 204, 204);
 }
 .report-item {
-    position: relative;
     padding: 10px 18px;
     width: 100%;
-    display: flex;
     align-items: center;
 }
 .report-item__title {
     width: 70%;
     display: flex;
     justify-content: flex-start;
-
     i {
         margin-right: 10px;
         font-size: 18px;
     }
 }
-.report-item__percent {
+.report-item__percent, .report-item__value {
     width: 15%;
 }
-.report-item__value {
+
+.form-input-currency {
+    margin-right: 10px;
+}
+.form-select-currency {
+    display: flex;
     width: 15%;
+    select:first-child {
+        margin-right: 10px;
+    }
+}
+#currency-result {
+    padding-bottom: 18px;
+}
+.from-data {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgb(117, 117, 117);
+}
+.toData {
+    font-size: 26px;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+}
+.exchange-result__rates {
+    margin-top: 10px;
+    font-size: 12px;
+}
+footer {
+    position: relative;
+    padding: 0 18px;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    a {
+        color: rgb(255, 255, 255);
+    }
 }

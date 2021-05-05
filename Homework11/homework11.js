@@ -5,14 +5,14 @@ const path = require('path');
 
 http.createServer((request, response) => {
     response.writeHead(200, {'Content-type': 'text/html'});
-    let renderData = `
+    let renderData = (`
         <h1>System information</h1>
         <div>Current user name: ${os.userInfo().username}</div>
         <div>OS type: ${os.type}</div>
-        <div>System work time: ${os.uptime} minutes</div>
+        <div>System work time: ${(os.uptime / 60).toFixed(2)} minutes</div>
         <div>Current work directory: ${path.dirname(__dirname)}</div>
         <div>Server file name: ${path.basename(__filename)}</div>
-    `;
+    `);
     response.end(renderData);
 }).listen(5000);
 
