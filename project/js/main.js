@@ -8,20 +8,43 @@ const appData = {
 };
 
 //Validation
-const isValidData = (title, sum) => {
-    let titleValue = /^(?! *$)[a-zA-Z0-9.+ '-]+$/.test(title.value);
-    let sumValue = /\d/.test(sum.value);
-    if(titleValue === false) {
-        title.previousElementSibling.style.display = "block";
+const isValidData = (sum, title = null, from = null, to = null) => {
+    let isTitleValid = true;
+    let isSumValid = true;
+
+    sum.previousElementSibling.innerHTML = "";
+
+    if(title !== null) {
+        title.previousElementSibling.innerHTML = "";
+        if(title.value === "") {
+            title.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> Must not be empty";
+            isTitleValid = false;
+        }
+        if(title.value.length > 50) {
+            title.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> The allowable length is 50 characters";
+            isTitleValid = false;
+        }
     }
-    if(sumValue === false) {
-        sum.previousElementSibling.style.display = "block";
+    if(+sum.value == 0) {
+        sum.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> Must not be empty";
+        isSumValid = false;
     }
-    if(titleValue && sumValue) {
-        title.previousElementSibling.style.display = "none";
-        sum.previousElementSibling.style.display = "none";
+    if(/\D/.test(sum.value)) {
+        sum.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> Must be a number";
+        isSumValid = false;
     }
-    return titleValue && sumValue;
+    if(+sum.value < 0) {
+        sum.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> Must be greater than 0";
+        isSumValid = false;
+    }
+
+    if(from !== null && to !== null) {
+        if(from.value === to.value) {
+            sum.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> You cannot convert the same currencies";
+            isSumValid === false;
+        }
+    }
+    return isTitleValid && isSumValid;
 };
 
 
@@ -54,6 +77,8 @@ dbReq.onupgradeneeded = event => {
 };
 dbReq.onsuccess = event => {
     db = event.target.result;
+    getData(db, incomesContainer, totalIncome, "incomes");
+    getData(db, expensesContainer, totalExpenses, "expenses");
 };
 dbReq.onerror = event => {
     console.log("Error of opening database" + event.target.errorCode);
@@ -106,8 +131,8 @@ const countBalance = () => {
     budgetContainer.innerHTML = appData.balance;
 };
 
-const getData = (container, total, branch) => {
-    let tx = db.transaction([branch], "readonly");
+const getData = (database, container, total, branch) => {
+    let tx = database.transaction([branch], "readonly");
     let store = tx.objectStore(branch);
 
     let req = store.openCursor();
@@ -205,9 +230,9 @@ const removeDataItem = (event) => {
     const tx = db.transaction([branchValue], "readwrite");
     tx.oncomplete = event => {
         if(branchValue === "incomes") {
-            getData(incomesContainer, totalIncome, branchValue);
+            getData(db, incomesContainer, totalIncome, branchValue);
         } else {
-            getData(expensesContainer, totalExpenses, branchValue);
+            getData(db, expensesContainer, totalExpenses, branchValue);
         }
     };
     tx.onerror = event => {
@@ -231,23 +256,17 @@ const sortReportData = () => {
     appData.report.sort((a, b) => b.sum - a.sum);
 }
 
-window.addEventListener("load", () => {
-    getData(incomesContainer, totalIncome, "incomes");
-    getData(expensesContainer, totalExpenses, "expenses");
-});
-
 addIncomeBtn.addEventListener("click", (e) => {
     e.preventDefault();
     let incomeName = document.querySelector("#income-name");
     let incomeSum = document.querySelector("#income-sum");
-    let isDataValid = isValidData(incomeName, incomeSum);
-    if(isDataValid === false) {
-        return;
+    let isDataValid = isValidData(incomeSum, incomeName);
+    if(isDataValid) {
+        addDBObjectItem(db, e.target.dataset.dbbranch, incomeName.value, +incomeSum.value);
+        incomeName.value = "";
+        incomeSum.value = "";
+        getData(db, incomesContainer, totalIncome, e.target.dataset.dbbranch);
     }
-    addDBObjectItem(db, e.target.dataset.dbbranch, incomeName.value, +incomeSum.value);
-    incomeName.value = "";
-    incomeSum.value = "";
-    getData(incomesContainer, totalIncome, e.target.dataset.dbbranch);
 });
 
 addExpenseBtn.addEventListener("click", (e) => {
@@ -256,17 +275,15 @@ addExpenseBtn.addEventListener("click", (e) => {
     let expenseSum = document.querySelector("#expense-sum");
     let expenseCategory = document.querySelector("#expense-category");
     
-    let isDataValid = isValidData(expenseName, expenseSum);
-    if(isDataValid === false) {
-        return;
+    let isDataValid = isValidData(expenseSum, expenseName);
+    if(isDataValid) {
+        addDBObjectItem(db, e.target.dataset.dbbranch, expenseName.value, +expenseSum.value, expenseCategory.value);
+        expenseName.value = "";
+        expenseSum.value = "";
+        getData(db, expensesContainer, totalExpenses, e.target.dataset.dbbranch);
     }
-    addDBObjectItem(db, e.target.dataset.dbbranch, expenseName.value, +expenseSum.value, expenseCategory.value);
-    expenseName.value = "";
-    expenseSum.value = "";
-    getData(expensesContainer, totalExpenses, e.target.dataset.dbbranch);
+    
 });
-
-// removeBtns.forEach(item => item.addEventListener("click", alert("Remove")));
 
 sortBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -281,8 +298,11 @@ const convertCurrency = () => {
     let toCurrency = document.querySelector("#to-currency");
     let currencySum = document.querySelector("#currency-sum");
     let resultContainer = document.querySelector("#currency-result");
+
+    let isValid = isValidData(currencySum, null, fromCurrency, toCurrency);
+    console.log(isValid);
     
-    if(fromCurrency.value !== toCurrency.value) {
+    if(fromCurrency.value !== toCurrency.value && isValid) {
         fetch(`https://fcsapi.com/api-v3/forex/latest?symbol=${fromCurrency.value}/${toCurrency.value}&access_key=dHHeQmYDhbEYF2jHfrgE`, {method: 'GET'})
         .then(response => {
             return response.json();
@@ -299,8 +319,6 @@ const convertCurrency = () => {
             currencySum.value = "";
             
         });
-    } else {
-        alert("You cannot conver the same currencies!");
     }
 };
 
