@@ -46,8 +46,6 @@ const isValidData = (sum, title = null, from = null, to = null) => {
     }
     return isTitleValid && isSumValid;
 };
-
-
 //Validation
 
 let addIncomeBtn = document.querySelector("#add-income");
@@ -290,7 +288,6 @@ sortBtn.addEventListener("click", (e) => {
     sortReportData();
     renderReport();
 })
-
 
 //Currency Exchange
 const convertCurrency = () => {
