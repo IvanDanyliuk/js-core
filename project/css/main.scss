@@ -167,6 +167,9 @@ header {
     width: 10%;
     font-weight: 600;
 }
+.item-message {
+    text-align: center;
+}
 .close-btn {
     cursor: pointer;
 }
@@ -200,6 +203,12 @@ header {
         color: rgb(255, 255, 255);
     }
 }
+.main-section__repost-header {
+    padding-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .main-section__report_body {
     position: relative;
     padding: 10px 0;
@@ -224,15 +233,18 @@ header {
 .report-item__percent, .report-item__value {
     width: 15%;
 }
-
-.form-input-currency {
-    margin-right: 10px;
+.empty-report-message {
+    padding: 0 18px;
+    text-align: center;
 }
+
 .form-select-currency {
-    display: flex;
     width: 15%;
-    select:first-child {
-        margin-right: 10px;
+    div {
+        display: flex;
+        select:first-child {
+            margin-right: 10px;
+        }
     }
 }
 #currency-result {
@@ -263,6 +275,14 @@ footer {
     font-size: 14px;
     color: rgb(255, 255, 255);
     a {
+        display: flex;
+        align-items: center;
         color: rgb(255, 255, 255);
+        span {
+            margin-right: 5px;
+        }
+        i {
+            font-size: 16px;
+        }
     }
 }

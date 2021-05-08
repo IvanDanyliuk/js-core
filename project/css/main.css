@@ -221,6 +221,10 @@ header {
   font-weight: 600;
 }
 
+.item-message {
+  text-align: center;
+}
+
 .close-btn {
   cursor: pointer;
 }
@@ -263,6 +267,19 @@ header {
   color: white;
 }
 
+.main-section__repost-header {
+  padding-bottom: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .main-section__report_body {
   position: relative;
   padding: 10px 0;
@@ -298,18 +315,22 @@ header {
   width: 15%;
 }
 
-.form-input-currency {
-  margin-right: 10px;
+.empty-report-message {
+  padding: 0 18px;
+  text-align: center;
 }
 
 .form-select-currency {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   width: 15%;
 }
 
-.form-select-currency select:first-child {
+.form-select-currency div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.form-select-currency div select:first-child {
   margin-right: 10px;
 }
 
@@ -353,6 +374,20 @@ footer {
 }
 
 footer a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: white;
+}
+
+footer a span {
+  margin-right: 5px;
+}
+
+footer a i {
+  font-size: 16px;
 }
 /*# sourceMappingURL=main.css.map */

@@ -4,8 +4,7 @@ const appData = {
     totalIncome: 0,
     totalExpenses: 0,
     balance: 0,
-    report: [],
-    currencyRes: 0
+    report: []
 };
 
 //Validation
@@ -24,11 +23,14 @@ const isValidData = (title, sum) => {
     }
     return titleValue && sumValue;
 };
+
+
 //Validation
 
 let addIncomeBtn = document.querySelector("#add-income");
 let addExpenseBtn = document.querySelector("#add-expense");
 let removeBtns = document.querySelectorAll(".remove");
+let sortBtn = document.querySelector("#sort-data");
 
 let incomesContainer = document.querySelector("#incomes-container");
 let totalIncome = document.querySelector("#total-income");
@@ -92,9 +94,13 @@ const countBalance = () => {
     let budgetContainer = document.querySelector("#final-budget-value");
     if(appData.incomes.length > 0) {
         appData.totalIncome = appData.incomes.reduce((a, b) => a + (+b.sum), 0);
+    } else {
+        appData.totalIncome = 0;
     }
     if(appData.expenses.length > 0) {
         appData.totalExpenses = appData.expenses.reduce((a, b) => a + (+b.sum), 0);
+    } else {
+        appData.totalExpenses = 0;
     }
     appData.balance = appData.totalIncome - appData.totalExpenses;
     budgetContainer.innerHTML = appData.balance;
@@ -127,27 +133,36 @@ const getData = (container, total, branch) => {
 };
 
 const renderData = (dataContainer, totalDataValue, branch) => {
-    dataContainer.innerHTML = "";
-    for(let i = 0; i < appData[branch].length; i++) {
-        let element = document.createElement("li");
-        element.className = "item expense-item";
-        element.innerHTML = (`
-            <div class="item-body">
-                <div class="item-body__title">${appData[branch][i].title}</div>
-                ${branch === "expenses" ? (
-                    `<div class="item-body__category">
-                        <i class="fas ${setExpenseIcon(appData[branch][i].category)}"></i>
-                    </div>`
-                ) : ''}
-                <div class="item-body__value">${appData[branch][i].sum}</div>
-            </div>
-            <div class="close-btn">
-                <i class="fas fa-times remove" onclick="removeDataItem(event)" data-id="${appData[branch][i].id}" data-branch="${branch}"></i>
-            </div>
+    if(appData[branch].length > 0) {
+        dataContainer.innerHTML = "";
+        for(let i = 0; i < appData[branch].length; i++) {
+            let element = document.createElement("li");
+            element.className = "item expense-item";
+            element.innerHTML = (`
+                <div class="item-body">
+                    <div class="item-body__title">${appData[branch][i].title}</div>
+                    ${branch === "expenses" ? (
+                        `<div class="item-body__category">
+                            <i class="fas ${setExpenseIcon(appData[branch][i].category)}"></i>
+                        </div>`
+                    ) : ''}
+                    <div class="item-body__value">${appData[branch][i].sum}</div>
+                </div>
+                <div class="close-btn">
+                    <i class="fas fa-times remove" onclick="removeDataItem(event)" data-id="${appData[branch][i].id}" data-branch="${branch}"></i>
+                </div>
+            `);
+            dataContainer.appendChild(element);
+        }
+        totalDataValue.innerHTML = branch === "incomes" ? appData.totalIncome : appData.totalExpenses;
+    } else {
+        totalDataValue.innerHTML = 0;
+        dataContainer.innerHTML = (`
+            <div class="item-message">Your ${branch} list is empty${branch === "incomes" ? "&#x1F641" : "&#x1F642;"}</div>
         `);
-        dataContainer.appendChild(element);
     }
-    totalDataValue.innerHTML = branch === "incomes" ? appData.totalIncome : appData.totalExpenses;
+    
+    
 };
 
 const fillReport = () => {
@@ -163,19 +178,23 @@ const fillReport = () => {
 
 const renderReport = () => {
     let reportContainer = document.querySelector("#report-body");
-    reportContainer.innerHTML = "";
-    for(let i = 0; i < appData.report.length; i++) {
-        let element = document.createElement("li");
-        element.className = "report-item";
-        element.innerHTML = (`
-            <div class="report-item__title">
-                <i class="fas ${setExpenseIcon(appData.report[i].title.toLowerCase())}"></i>
-                <span>${appData.report[i].title}</span>
-            </div>
-            <div class="report-item__percent">${appData.report[i].percent}%</div>
-            <div class="report-item__value">${appData.report[i].sum}</div>
-        `);
-        reportContainer.appendChild(element);
+    if(appData.expenses.length > 0) {
+        reportContainer.innerHTML = "";
+        for(let i = 0; i < appData.report.length; i++) {
+            let element = document.createElement("li");
+            element.className = "report-item";
+            element.innerHTML = (`
+                <div class="report-item__title">
+                    <i class="fas ${setExpenseIcon(appData.report[i].title.toLowerCase())}"></i>
+                    <span>${appData.report[i].title}</span>
+                </div>
+                <div class="report-item__percent">${appData.report[i].percent}%</div>
+                <div class="report-item__value">${appData.report[i].sum}</div>
+            `);
+            reportContainer.appendChild(element);
+        }
+    } else {
+        reportContainer.innerHTML = "<div class='empty-report-message'>Your expenses list is empty!</div>"
     }
 };
 
@@ -208,6 +227,9 @@ const removeDataItem = (event) => {
     };
 };
 
+const sortReportData = () => {
+    appData.report.sort((a, b) => b.sum - a.sum);
+}
 
 window.addEventListener("load", () => {
     getData(incomesContainer, totalIncome, "incomes");
@@ -244,7 +266,13 @@ addExpenseBtn.addEventListener("click", (e) => {
     getData(expensesContainer, totalExpenses, e.target.dataset.dbbranch);
 });
 
-removeBtns.forEach(item => item.addEventListener("click", alert("Remove")));
+// removeBtns.forEach(item => item.addEventListener("click", alert("Remove")));
+
+sortBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sortReportData();
+    renderReport();
+})
 
 
 //Currency Exchange
@@ -262,13 +290,14 @@ const convertCurrency = () => {
             let result = +currencySum.value * +response.response[0].c;
             resultContainer.innerHTML = (`
                 <div class="from-data">${currencySum.value} ${fromCurrency.value.toUpperCase()} =</div>
-                <div class="toData">${result.toFixed(4)} ${toCurrency.value.toUpperCase()}</div>
+                <div class="toData">${result.toFixed(2)} ${toCurrency.value.toUpperCase()}</div>
                 <div class="exchange-result__rates">
                     <div>1 ${fromCurrency.value.toUpperCase()} = ${Number(response.response[0].c).toFixed(4)} ${toCurrency.value.toUpperCase()}</div>
                     <div>1 ${toCurrency.value.toUpperCase()} = ${Number(currencySum.value / result).toFixed(4)} ${fromCurrency.value.toUpperCase()}</div>
                 </div>
             `);
             currencySum.value = "";
+            
         });
     } else {
         alert("You cannot conver the same currencies!");
@@ -280,3 +309,5 @@ convertBtn.addEventListener("click", event => {
     event.preventDefault();
     convertCurrency();
 });
+
+

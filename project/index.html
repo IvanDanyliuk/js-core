@@ -35,11 +35,13 @@
                 <form class="main-section__form">
                     <fieldset class="form-input-text">
                         <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div>
-                        <input type="text" class="section-input" id="income-name" placeholder="Income title...">
+                        <!-- <div class="error-message"></div> -->
+                        <input type="text" class="section-input" id="income-name" placeholder="Income title..." data-type="title">
                     </fieldset>
                     <fieldset class="form-input-sum">
                         <div class="error-sum"><i class="fas fa-exclamation-circle"></i> Must be a number</div>
-                        <input type="text" class="section-input" id="income-sum" placeholder="Income amount...">
+                        <!-- <div class="error-message"></div> -->
+                        <input type="text" class="section-input" id="income-sum" placeholder="Income amount..." data-type="amount">
                     </fieldset>
                     <button class="add-btn" id="add-income" data-dbbranch="incomes">Add</button>
                 </form>
@@ -49,21 +51,23 @@
 
         <section class="main-section">
             <div class="main-section__heading">
+                <i class="fas fa-angle-down"></i>
                 <div class="main-section__output-data">
                     <h2>Expenses: <span id="total-expenses"></span></h2>
                     <div id="total-expenses"></div>
                 </div>
-                <i class="fas fa-angle-down"></i>
             </div>
             <div class="main-section__panel">
                 <form class="main-section__form">
                     <fieldset class="form-input-text">
                         <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div>
-                        <input type="text" class="section-input" id="expense-name" placeholder="Expense title...">
+                        <!-- <div class="error-message"></div> -->
+                        <input type="text" class="section-input" id="expense-name" placeholder="Expense title..." data-type="title">
                     </fieldset>
                     <fieldset class="form-input-sum">
                         <div class="error-sum"><i class="fas fa-exclamation-circle"></i> Must be a number</div>
-                        <input type="text" class="section-input" id="expense-sum" placeholder="Expense amount...">
+                        <!-- <div class="error-message"></div> -->
+                        <input type="text" class="section-input" id="expense-sum" placeholder="Expense amount..." data-type="amount">
                     </fieldset>
                     <select class="form-input-category" id="expense-category">
                         <option value="home">Home</option>
@@ -86,7 +90,10 @@
                 <div class="main-section__budget">Your balance: <span id="final-budget-value"></span></div>
             </div>
             <div class="main-section__report">
-                <h3>Your expenses report</h3>
+                <div class="main-section__repost-header">
+                    <h3>Your expenses report</h3>
+                    <button class="add-btn" id="sort-data">Sort <i class="fas fa-sort-amount-down"></i></button>
+                </div>
                 <ul class="main-section__report_body" id="report-body"></ul>
             </div>
         </section>
@@ -98,20 +105,27 @@
             </div>
             <div class="main-section__panel">
                 <form class="main-section__form">
-                    <input type="text" class="form-input-currency" id="currency-sum">
+                    <fieldset class="form-currency-input">
+                        <!-- <div class="error-text"><i class="fas fa-exclamation-circle"></i> Must not be empty</div> -->
+                        <div class="error-message"></div>
+                        <input type="text" class="form-input-currency" id="currency-sum" placeholder="Enter your amount..." data-type="amount">
+                    </fieldset>
                     <fieldset class="form-select-currency">
-                        <select id="from-currency">
-                            <option value="usd">USD</option>
-                            <option value="eur">EUR</option>
-                            <option value="uah">UAH</option>
-                            <option value="pln">PLN</option>
-                        </select>
-                        <select id="to-currency">
-                            <option value="uah">UAH</option>
-                            <option value="eur">EUR</option>
-                            <option value="usd">USD</option>
-                            <option value="pln">PLN</option>
-                        </select>
+                        <div class="error-message"></div>
+                        <div>
+                            <select id="from-currency">
+                                <option value="usd">USD</option>
+                                <option value="eur">EUR</option>
+                                <option value="uah">UAH</option>
+                                <option value="gbp">GBP</option>
+                            </select>
+                            <select id="to-currency">
+                                <option value="uah">UAH</option>
+                                <option value="eur">EUR</option>
+                                <option value="usd">USD</option>
+                                <option value="gbp">GBP</option>
+                            </select>
+                        </div>
                     </fieldset>
                     <button class="add-btn" id="convert">Convert</button>
                 </form>
@@ -125,7 +139,7 @@
         <div class="footer__title">Ivan Danyliuk. JSCore. 2021</div>
         <div>
             <a href="https://github.com/IvanDanyliuk/js-core/tree/main/project" target="_blank">
-                See the code
+                <span>See the code</span>
                 <i class="fab fa-github"></i>
             </a>
         </div>

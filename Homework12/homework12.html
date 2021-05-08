@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 12</title>
+</head>
+<body>
+    <!-- ****** Task 1 ****** -->
+    <button>Vote!</button>
+
+    <script>
+        const vote = () => {
+            const voteRequest = new XMLHttpRequest();
+            voteRequest.open("GET", "http://127.0.0.1:5500", true);
+            voteRequest.onreadystatechange = () => {
+                if(voteRequest.readyState < 4) {
+                    document.getElementsByTagName("button")[0].innerHTML = "Sending...";
+                } else if(voteRequest.readyState === 4) {
+                    if(voteRequest.status === 200) {
+                        document.getElementsByTagName("button")[0].innerHTML = `Your vote is accepted: ${new Date()}`;
+                    } else {
+                        alert(`Error: ${voteRequest.status} ${voteRequest.statusText}`)
+                    }
+                }
+            }
+            voteRequest.send();
+        }
+        document.querySelector("button").addEventListener("click", vote);
+    </script>
+
+
+    <!-- ****** Task 2 ****** -->
+    <!-- <button>Download books</button>
+    <ul id="authors"></ul>
+
+    <script>
+        document.querySelector("button").addEventListener("click", () => {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "books.json", true);
+            xhr.onreadystatechange = () => {
+                if(xhr.readyState !== 4) {
+                    return;
+                }
+                if(xhr.status !== 200) {
+                    throw new Error(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                    let container = document.querySelector("#authors");
+                    let resp = JSON.parse(xhr.responseText).map(item => item.author);
+                    resp.forEach(item => {
+                        let element = document.createElement("li");
+                        element.innerHTML = item;
+                        container.appendChild(element);
+                    });
+                }
+            }
+            xhr.send();
+        });
+    </script> -->
+</body>
+</html>
