@@ -301,7 +301,11 @@ const convertCurrency = () => {
     if(fromCurrency.value !== toCurrency.value && isValid) {
         fetch(`https://fcsapi.com/api-v3/forex/latest?symbol=${fromCurrency.value}/${toCurrency.value}&access_key=dHHeQmYDhbEYF2jHfrgE`, {method: 'GET'})
         .then(response => {
-            return response.json();
+            if(response) {
+                return response.json();
+            } else {
+                throw new Error("Request not sent!");
+            }
         }).then(response => {
             let result = +currencySum.value * +response.response[0].c;
             resultContainer.innerHTML = (`
@@ -321,7 +325,11 @@ const convertCurrency = () => {
 const convertBtn = document.querySelector("#convert");
 convertBtn.addEventListener("click", event => {
     event.preventDefault();
-    convertCurrency();
+    try {
+        convertCurrency();
+    } catch(e) {
+        console.log(e);
+    }
 });
 
 
