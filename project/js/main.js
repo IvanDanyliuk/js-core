@@ -16,7 +16,7 @@ const isValidData = (sum, title = null, from = null, to = null) => {
 
     if(title !== null) {
         title.previousElementSibling.innerHTML = "";
-        if(title.value === "") {
+        if(title.value === "" || !/\S/.test(title.value)) {
             title.previousElementSibling.innerHTML = "<i class='fas fa-exclamation-circle'></i> Must not be empty";
             isTitleValid = false;
         }
@@ -297,7 +297,6 @@ const convertCurrency = () => {
     let resultContainer = document.querySelector("#currency-result");
 
     let isValid = isValidData(currencySum, null, fromCurrency, toCurrency);
-    console.log(isValid);
     
     if(fromCurrency.value !== toCurrency.value && isValid) {
         fetch(`https://fcsapi.com/api-v3/forex/latest?symbol=${fromCurrency.value}/${toCurrency.value}&access_key=dHHeQmYDhbEYF2jHfrgE`, {method: 'GET'})
